@@ -9,15 +9,19 @@ This is a cordova plugin to use the Laser Barcode Scanner of Panasonic handhelds
 
 Activate the scanner and pass the success and error callback functions:
 
+```
 cordova.plugins.PanasonicScanner.activate({}, function(result) {
 // each scan will trigger this callback function
 }, function(error) {
 // catch error on activation
 });
+```
 
 On windows you'll need to add this to your project:
 
+```
 document.addEventListener("resume",this.activatePanasonicScanner, false);
+```
 
 Assuming that "activatePanasonicScanner" is the function where you activate the scanner.
 
