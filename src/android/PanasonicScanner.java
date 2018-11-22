@@ -45,7 +45,6 @@ public class PanasonicScanner extends CordovaPlugin  implements BarcodeListener,
         @Override
         protected Boolean doInBackground(BarcodeReader... params) {
             try {
-                //params[0]
                 if(!params[0].isEnabled()) {
                     params[0].enable(10000);
                 }
