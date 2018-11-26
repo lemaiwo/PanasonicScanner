@@ -45,6 +45,9 @@ public class PanasonicScanner extends CordovaPlugin  implements BarcodeListener,
         @Override
         protected Boolean doInBackground(BarcodeReader... params) {
             try {
+                if(!params[0].isEnabled()) {
+                    params[0].enable(10000);
+                }
                 params[0].addBarcodeListener(PanasonicScanner.this);
                 return true;
             } catch (Exception ex) {
@@ -78,7 +81,10 @@ public class PanasonicScanner extends CordovaPlugin  implements BarcodeListener,
 			//this.activateReader(args.getInt(0),callbackContext);
 			this.activateReader(callbackContext);
 			return true;
-		}
+		}else if (action.equals("deactivate")) {
+            this.deactivateReader(callbackContext);
+            return true;
+        }
         return false;
     }
 
@@ -127,6 +133,18 @@ public class PanasonicScanner extends CordovaPlugin  implements BarcodeListener,
 		}
 		
 	}
+
+	private void deactivateReader(CallbackContext callbackContext) {
+        List<BarcodeReader> readers = BarcodeReaderManager.getBarcodeReaders();
+        BarcodeReader selectedReader = readers.get(0);
+        try {
+            selectedReader.disable();
+            callbackContextReference = callbackContext;
+        } catch (BarcodeException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onRead(BarcodeReader paramBarcodeReader, BarcodeData paramBarcodeData)
     {
