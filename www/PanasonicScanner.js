@@ -12,5 +12,3 @@ exports.activate = function(arg0, success, error) {
 exports.deactivate = function(arg0, success, error) {
     exec(success, error, "PanasonicScanner", "deactivate", [arg0]);
 }
-
-});
